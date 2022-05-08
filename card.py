@@ -7,11 +7,11 @@ class Card:
       self.faceup = True
       self.held = False
       
-      front = pygame.image.load('./img/cards/' + rank + '_of_' + suit + '.png')
+      front = pygame.image.load('./cards/' + rank + '_of_' + suit + '.png')
       front = pygame.transform.smoothscale(front, (140, 200))
       self.front = front
       
-      back = pygame.image.load('./img/back-side.png')
+      back = pygame.image.load('./cards/card_back.png')
       back = pygame.transform.smoothscale(back, (140, 200))
 
       self.back = back

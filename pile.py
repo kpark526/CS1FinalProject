@@ -1,5 +1,6 @@
 import pygame
 from card import Card
+import random
 
 class Pile:
    def __init__(self,x,y):
@@ -23,8 +24,14 @@ class Pile:
       card.held = False
    
    def pop(self):
-      if len(self.stack) > stack:
+      if len(self.stack) > 0:
          card = self.stack.pop()
          card.location = self.location.copy()
          card.held = True
          return card
+         
+   def peek(self):
+      return self.stack[-1]
+   
+   def shuffle(self):
+      random.shuffle(self.stack)
