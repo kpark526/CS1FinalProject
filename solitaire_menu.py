@@ -38,7 +38,7 @@ if __name__ == "__main__":
                os.system("python solitaire_easy.py")
             elif width/2 - 400 < mouse[0] < width/2+325-400and height/2 <= mouse[1] < height/2+40:
                pygame.quit()
-               os.system("python solitaire_hard.py")
+               os.system("python solitaire_classic.py")
       
       scene.fill([63,108,81])
       mouse = pygame.mouse.get_pos()

@@ -1,6 +1,6 @@
 import pygame
 import time
-from cardEASY import Card
+from card import Card
 from pile import Pile
 import random
 
@@ -154,7 +154,7 @@ if __name__ == "__main__":
                # if you want to move the card to the next Deck
                if nextDeck.touched(event.pos):
                   nextDeck.push(card)
-                  card.pos
+                  card = None
 
                # put any card into any well
                elif well1.touched(event.pos):
@@ -175,6 +175,7 @@ if __name__ == "__main__":
             card.react(event,clock)
       
       #redo scene after every event
+      # scene.fill([0,153,0])
       deck.stage(scene,1,0,0)
       nextDeck.stage(scene,0,0,0)
       
@@ -187,4 +188,5 @@ if __name__ == "__main__":
          card.stage(scene,0,0,0)
          
       # update display
+      
       pygame.display.update()
