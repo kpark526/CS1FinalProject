@@ -3,6 +3,7 @@
 Solitaire final project by Kelley and Jude.
 
 This solitaire project has a menu for you to choose from two modes of solitaire.
+To start a game, download all the files included. Then run solitaire_menu.py. You can also run the file for the mode you want directly.
 
 Freestyle Solitaire:
 - Starts off with a shuffled deck of cards.
@@ -19,8 +20,6 @@ Freestyle Solitaire:
 	- Cannot move piles at a time
 	- Cannot view the stack created with revealed cards
 
-
-To start a game, download all the files included. Then run the solitaire menu file. You can also run the file for the mode you want directly.
 
 Credits:
 - Card images were pulled from the internet
