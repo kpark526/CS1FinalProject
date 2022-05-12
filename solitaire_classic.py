@@ -36,9 +36,14 @@ if __name__ == "__main__":
    
    # display of 1400 by 800 pixels
    scene = pygame.display.set_mode((1120,800))
-   pygame.display.set_caption("Solitaire")
+   pygame.display.set_caption("Solitaire 'Classic' Mode")
    
    clock = pygame.time.Clock()
+   
+   
+   pygame.mixer.init()
+   pygame.mixer.music.load('theme2.mp3')
+   pygame.mixer.music.play(loops = -1)
    
    # upper left pile of cards
    # contains every card in a deck

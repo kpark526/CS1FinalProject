@@ -1,6 +1,6 @@
 import pygame
 import time
-from card import Card
+from cardEASY import Card
 from pile import Pile
 import random
 
@@ -36,9 +36,17 @@ if __name__ == "__main__":
    
    # display of 1400 by 800 pixels
    scene = pygame.display.set_mode((1120,800))
-   pygame.display.set_caption("Solitaire")
+   pygame.display.set_caption("Solitaire Freestyle Mode")
+   
+   pygame.mixer.init()
+   pygame.mixer.music.load('theme2.mp3')
+   pygame.mixer.music.play(loops = -1)
+   
    
    clock = pygame.time.Clock()
+   
+   
+   
    
    # upper left pile of cards
    # contains every card in a deck
@@ -100,14 +108,6 @@ if __name__ == "__main__":
    well3.stage(scene,0,0,0)
    well4.stage(scene,0,0,0)
       
-   gamePile1.stage(scene,0,gamePile1.size(),1)
-   gamePile2.stage(scene,0,gamePile2.size(),2)
-   gamePile3.stage(scene,0,gamePile3.size(),3)
-   gamePile4.stage(scene,0,gamePile4.size(),4)
-   gamePile5.stage(scene,0,gamePile5.size(),5)
-   gamePile6.stage(scene,0,gamePile6.size(),6)
-   gamePile7.stage(scene,0,gamePile7.size(),7)
-   
    running = True
    while running:
       # loop for events
@@ -143,28 +143,6 @@ if __name__ == "__main__":
             elif well4.touched(event.pos):
                card = well4.pop()
                previousPile = well4
-            
-            elif gamePile1.touched(event.pos):
-               card = gamePile1.pop()
-               previousPile = gamePile1
-            elif gamePile2.touched(event.pos):
-               card = gamePile2.pop()
-               previousPile = gamePile2
-            elif gamePile3.touched(event.pos):
-               card = gamePile3.pop()
-               previousPile = gamePile3
-            elif gamePile4.touched(event.pos):
-               card = gamePile4.pop()
-               previousPile = gamePile4
-            elif gamePile5.touched(event.pos):
-               card = gamePile5.pop()
-               previousPile = gamePile5
-            elif gamePile6.touched(event.pos):
-               card = gamePile6.pop()
-               previousPile = gamePile6
-            elif gamePile7.touched(event.pos):
-               card = gamePile7.pop()
-               previousPile = gamePile7
          
          # if you lift up the mouse while holding a card      
          elif event.type == pygame.MOUSEBUTTONUP:
@@ -176,6 +154,7 @@ if __name__ == "__main__":
                # if you want to move the card to the next Deck
                if nextDeck.touched(event.pos):
                   nextDeck.push(card)
+                  card.pos
 
                # put any card into any well
                elif well1.touched(event.pos):
@@ -191,37 +170,11 @@ if __name__ == "__main__":
                   well4.push(card)
                   card = None
                
-               # any card onto any game pile  
-               elif gamePile1.touched(event.pos):
-                  gamePile1.push(card)
-                  card = None
-               elif gamePile2.touched(event.pos):
-                  gamePile2.push(card)
-                  card = None
-               elif gamePile3.touched(event.pos):
-                  gamePile3.push(card)
-                  card = None
-               elif gamePile4.touched(event.pos):
-                  gamePile4.push(card)
-                  card = None
-               elif gamePile5.touched(event.pos):
-                  gamePile5.push(card)
-                  card = None
-               elif gamePile6.touched(event.pos):
-                  gamePile6.push(card)
-                  card = None
-               elif gamePile7.touched(event.pos):
-                  gamePile7.push(card)
-                  card = None
-               else:
-                  previousPile.push(card)
-                  card = None
          # react event for cards
          if card:
             card.react(event,clock)
       
       #redo scene after every event
-      scene.fill([0,153,0])
       deck.stage(scene,1,0,0)
       nextDeck.stage(scene,0,0,0)
       
@@ -230,13 +183,6 @@ if __name__ == "__main__":
       well3.stage(scene,0,0,0)
       well4.stage(scene,0,0,0)
       
-      gamePile1.stage(scene,0,gamePile1.size(),1)
-      gamePile2.stage(scene,0,gamePile2.size(),2)
-      gamePile3.stage(scene,0,gamePile3.size(),3)
-      gamePile4.stage(scene,0,gamePile4.size(),4)
-      gamePile5.stage(scene,0,gamePile5.size(),5)
-      gamePile6.stage(scene,0,gamePile6.size(),6)
-      gamePile7.stage(scene,0,gamePile7.size(),7)
       if card:
          card.stage(scene,0,0,0)
          

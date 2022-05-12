@@ -12,6 +12,10 @@ if __name__ == "__main__":
    scene = pygame.display.set_mode((1120,800))
    pygame.display.set_caption("Solitaire Menu")
    
+   pygame.mixer.init()
+   pygame.mixer.music.load('theme.mp3')
+   pygame.mixer.music.play(loops = -1)
+   
    color = (255,255,255)
    boxColor = (255,234,236)
    boxColor2 = (243,154,157)
@@ -30,12 +34,11 @@ if __name__ == "__main__":
             running = False
          elif event.type == pygame.MOUSEBUTTONDOWN:
             if width/2 < mouse[0] < width/2+325 and height/2 <= mouse[1] < height/2+40:
-               import solitaire_easy
-               running = False
                pygame.quit()
-               sys.exit()
+               os.system("python solitaire_easy.py")
             elif width/2 - 400 < mouse[0] < width/2+325-400and height/2 <= mouse[1] < height/2+40:
-               running = False
+               pygame.quit()
+               os.system("python solitaire_hard.py")
       
       scene.fill([63,108,81])
       mouse = pygame.mouse.get_pos()
