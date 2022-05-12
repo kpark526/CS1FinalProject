@@ -2,10 +2,14 @@
 
 Solitaire final project by Kelley and Jude.
 
+This solitaire project has a menu for you to choose from two modes of solitaire.
+
 Freestyle Solitaire:
 - Starts off with a shuffled deck of cards.
 - All movements are up to the player, and can move cards anywhere.
 - This allows for unlimited freedom, and a full game of solitaire can be played, but a vast majority of the actions are decided by the player.
+- Restrictions
+	- Could not make separate card objects for each picked up card. When dragging a card the last place the card was is kept on the screen.
 
 "Classic" Solitaire:
 - Starts off with a shuffled deck of cards and a premade board state.
@@ -19,6 +23,6 @@ Freestyle Solitaire:
 To start a game, download all the files included. Then run the solitaire menu file. You can also run the file for the mode you want directly.
 
 Credits:
-Card images were pulled from the internet
-Menu Theme : Main Theme from Fruit Box by GameSaien
-Easy/Hard Solitaire Theme : Title Theme from Super Mario Maker by Nintendo
+- Card images were pulled from the internet
+- Menu Theme : Main Theme from Fruit Box by GameSaien
+- Easy/Hard Solitaire Theme : Title Theme from Super Mario Maker by Nintendo
