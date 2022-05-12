@@ -16,7 +16,7 @@ Freestyle Solitaire:
 	- Cannot view the stack created with revealed cards
 
 
-
+To start a game, download all the files included. Then run the solitaire menu file. You can also run the file for the mode you want directly.
 
 Credits:
 Card images were pulled from the internet
