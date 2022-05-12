@@ -71,7 +71,6 @@ if __name__ == "__main__":
    for i in range(3):
       gamePile3.push(deck.pop())
       
-   
    gamePile4 = Pile(460,250)
    for i in range(4):
       gamePile4.push(deck.pop())
@@ -92,6 +91,23 @@ if __name__ == "__main__":
    card = None
    previousPile = None
    
+   scene.fill([0,153,0])
+   deck.stage(scene,1,0,0)
+   nextDeck.stage(scene,0,0,0)
+      
+   well1.stage(scene,0,0,0)
+   well2.stage(scene,0,0,0)
+   well3.stage(scene,0,0,0)
+   well4.stage(scene,0,0,0)
+      
+   gamePile1.stage(scene,0,gamePile1.size(),1)
+   gamePile2.stage(scene,0,gamePile2.size(),2)
+   gamePile3.stage(scene,0,gamePile3.size(),3)
+   gamePile4.stage(scene,0,gamePile4.size(),4)
+   gamePile5.stage(scene,0,gamePile5.size(),5)
+   gamePile6.stage(scene,0,gamePile6.size(),6)
+   gamePile7.stage(scene,0,gamePile7.size(),7)
+   
    running = True
    while running:
       # loop for events
@@ -103,8 +119,14 @@ if __name__ == "__main__":
          # if you click on a pile, it grabs the top card
          elif event.type == pygame.MOUSEBUTTONDOWN:
             if deck.touched(event.pos):
-               card = deck.pop()
-               previousPile = deck
+               if(deck.isEmpty() == True):
+                     for i in range(nextDeck.size()):
+                        deck.push(nextDeck.pop())
+                     nextDeck = Pile(160,10)
+               else:
+                  card = deck.pop()
+                  previousPile = deck
+               
             elif nextDeck.touched(event.pos):
                card = nextDeck.pop()
                previousPile = nextDeck
@@ -155,10 +177,8 @@ if __name__ == "__main__":
                if nextDeck.touched(event.pos):
                   nextDeck.push(card)
 
-               # currently the well that works
                # if the well is empty, the card has to be an ace to be placed
                # if the well is not empty, the card has to be the same suit and the next card sequentially
-               # copy and paste this logic into the other wells
                elif well1.touched(event.pos):
                   if(len(well1.stack) == 0):
                      if(currentRank == 'ace'):
@@ -175,18 +195,69 @@ if __name__ == "__main__":
                      else:
                         previousPile.push(card)
                         card = None
-                  
+                        
+                
                elif well2.touched(event.pos):
-                  well2.push(card)
-                  card = None
-               elif well3.touched(event.pos):
-                  well3.push(card)
-                  card = None
-               elif well4.touched(event.pos):
-                  well4.push(card)
-                  card = None
+                  if(len(well2.stack) == 0):
+                     if(currentRank == 'ace'):
+                        well2.push(card)
+                        card = None
+                     else:
+                        previousPile.push(card)
+                        card = None 
+                  else:
+                     top = well2.peek()
+                     if(top.suit == currentSuit and getNumRank(top.rank) == getNumRank(currentRank)-1):
+                        well2.push(card)
+                        card = None
+                     else:
+                        previousPile.push(card)
+                        card = None
                
-               # only gamepile working atm
+               elif well3.touched(event.pos):
+                  if(len(well3.stack) == 0):
+                     if(currentRank == 'ace'):
+                        well3.push(card)
+                        card = None
+                     else:
+                        previousPile.push(card)
+                        card = None 
+                  else:
+                     top = well3.peek()
+                     if(top.suit == currentSuit and getNumRank(top.rank) == getNumRank(currentRank)-1):
+                        well3.push(card)
+                        card = None
+                     else:
+                        previousPile.push(card)
+                        card = None
+                        
+               elif well4.touched(event.pos):
+                  if(len(well4.stack) == 0):
+                     if(currentRank == 'ace'):
+                        well4.push(card)
+                        card = None
+                     else:
+                        previousPile.push(card)
+                        card = None 
+                  else:
+                     top = well4.peek()
+                     if(top.suit == currentSuit and getNumRank(top.rank) == getNumRank(currentRank)-1):
+                        well4.push(card)
+                        card = None
+                     else:
+                        previousPile.push(card)
+                        card = None
+                  
+               # elif well2.touched(event.pos):
+#                   well2.push(card)
+#                   card = None
+#                elif well3.touched(event.pos):
+#                   well3.push(card)
+#                   card = None
+#                elif well4.touched(event.pos):
+#                   well4.push(card)
+#                   card = None
+               
                # only allows a card of the opposite color and one less than the rank to be placed on the pile
                # copy and paste these for the other piles   
                elif gamePile1.touched(event.pos):
@@ -207,23 +278,124 @@ if __name__ == "__main__":
                         card = None
                
                elif gamePile2.touched(event.pos):
-                  gamePile2.push(card)
-                  card = None
+                  if(len(gamePile2.stack) == 0):
+                     if(currentRank == 'king'):
+                        gamePile2.push(card)
+                        card = None
+                     else:
+                        previousPile.push(card)
+                        card = None 
+                  else:
+                     top = gamePile2.peek()
+                     if(oppositeColor(top.suit) == getColor(currentSuit) and getNumRank(top.rank) == getNumRank(currentRank)+1):
+                        gamePile2.push(card)
+                        card = None
+                     else:
+                        previousPile.push(card)
+                        card = None
+               
                elif gamePile3.touched(event.pos):
-                  gamePile3.push(card)
-                  card = None
+                  if(len(gamePile3.stack) == 0):
+                     if(currentRank == 'king'):
+                        gamePile3.push(card)
+                        card = None
+                     else:
+                        previousPile.push(card)
+                        card = None 
+                  else:
+                     top = gamePile3.peek()
+                     if(oppositeColor(top.suit) == getColor(currentSuit) and getNumRank(top.rank) == getNumRank(currentRank)+1):
+                        gamePile3.push(card)
+                        card = None
+                     else:
+                        previousPile.push(card)
+                        card = None
+                        
                elif gamePile4.touched(event.pos):
-                  gamePile4.push(card)
-                  card = None
+                  if(len(gamePile4.stack) == 0):
+                     if(currentRank == 'king'):
+                        gamePile4.push(card)
+                        card = None
+                     else:
+                        previousPile.push(card)
+                        card = None 
+                  else:
+                     top = gamePile4.peek()
+                     if(oppositeColor(top.suit) == getColor(currentSuit) and getNumRank(top.rank) == getNumRank(currentRank)+1):
+                        gamePile4.push(card)
+                        card = None
+                     else:
+                        previousPile.push(card)
+                        card = None
+                        
                elif gamePile5.touched(event.pos):
-                  gamePile5.push(card)
-                  card = None
+                  if(len(gamePile5.stack) == 0):
+                     if(currentRank == 'king'):
+                        gamePile5.push(card)
+                        card = None
+                     else:
+                        previousPile.push(card)
+                        card = None 
+                  else:
+                     top = gamePile5.peek()
+                     if(oppositeColor(top.suit) == getColor(currentSuit) and getNumRank(top.rank) == getNumRank(currentRank)+1):
+                        gamePile5.push(card)
+                        card = None
+                     else:
+                        previousPile.push(card)
+                        card = None
+                        
                elif gamePile6.touched(event.pos):
-                  gamePile6.push(card)
-                  card = None
+                  if(len(gamePile6.stack) == 0):
+                     if(currentRank == 'king'):
+                        gamePile6.push(card)
+                        card = None
+                     else:
+                        previousPile.push(card)
+                        card = None 
+                  else:
+                     top = gamePile6.peek()
+                     if(oppositeColor(top.suit) == getColor(currentSuit) and getNumRank(top.rank) == getNumRank(currentRank)+1):
+                        gamePile6.push(card)
+                        card = None
+                     else:
+                        previousPile.push(card)
+                        card = None
+                        
                elif gamePile7.touched(event.pos):
-                  gamePile7.push(card)
-                  card = None
+                  if(len(gamePile7.stack) == 0):
+                     if(currentRank == 'king'):
+                        gamePile7.push(card)
+                        card = None
+                     else:
+                        previousPile.push(card)
+                        card = None 
+                  else:
+                     top = gamePile7.peek()
+                     if(oppositeColor(top.suit) == getColor(currentSuit) and getNumRank(top.rank) == getNumRank(currentRank)+1):
+                        gamePile7.push(card)
+                        card = None
+                     else:
+                        previousPile.push(card)
+                        card = None
+               # elif gamePile2.touched(event.pos):
+#                   gamePile2.push(card)
+#                   card = None
+#                elif gamePile3.touched(event.pos):
+#                   gamePile3.push(card)
+#                   card = None
+#                elif gamePile4.touched(event.pos):
+#                   gamePile4.push(card)
+#                   card = None
+#                elif gamePile5.touched(event.pos):
+#                   gamePile5.push(card)
+#                   card = None
+#                elif gamePile6.touched(event.pos):
+#                   gamePile6.push(card)
+#                   card = None
+#                elif gamePile7.touched(event.pos):
+#                   gamePile7.push(card)
+#                   card = None
                else:
                   previousPile.push(card)
                   card = None
@@ -233,23 +405,23 @@ if __name__ == "__main__":
       
       #redo scene after every event
       scene.fill([0,153,0])
-      deck.stage(scene)
-      nextDeck.stage(scene)
+      deck.stage(scene,1,0,0)
+      nextDeck.stage(scene,0,0,0)
       
-      well1.stage(scene)
-      well2.stage(scene)
-      well3.stage(scene)
-      well4.stage(scene)
+      well1.stage(scene,0,0,0)
+      well2.stage(scene,0,0,0)
+      well3.stage(scene,0,0,0)
+      well4.stage(scene,0,0,0)
       
-      gamePile1.stage(scene)
-      gamePile2.stage(scene)
-      gamePile3.stage(scene)
-      gamePile4.stage(scene)
-      gamePile5.stage(scene)
-      gamePile6.stage(scene)
-      gamePile7.stage(scene)
+      gamePile1.stage(scene,0,gamePile1.size(),1)
+      gamePile2.stage(scene,0,gamePile2.size(),2)
+      gamePile3.stage(scene,0,gamePile3.size(),3)
+      gamePile4.stage(scene,0,gamePile4.size(),4)
+      gamePile5.stage(scene,0,gamePile5.size(),5)
+      gamePile6.stage(scene,0,gamePile6.size(),6)
+      gamePile7.stage(scene,0,gamePile7.size(),7)
       if card:
-         card.stage(scene)
+         card.stage(scene,0,0,0)
          
       # update display
       pygame.display.update()

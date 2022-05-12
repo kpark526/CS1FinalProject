@@ -9,9 +9,9 @@ class Pile:
       
       self.location = pygame.Rect(x,y,140,200)
       
-   def stage(self, scene):
+   def stage(self, scene, deck, size, gp):
       if len(self.stack) > 0:
-         self.stack[-1].stage(scene)
+         self.stack[-1].stage(scene,deck,size,gp)
       else:
          pygame.draw.rect(scene, [0,53,0], self.location)
          
@@ -29,9 +29,16 @@ class Pile:
          card.location = self.location.copy()
          card.held = True
          return card
+   
+   def isEmpty(self):
+      return len(self.stack) == 0
+   
+   def size(self):
+      return len(self.stack)
          
    def peek(self):
-      return self.stack[-1]
+      card = self.stack[-1]
+      return card
    
    def shuffle(self):
       random.shuffle(self.stack)
