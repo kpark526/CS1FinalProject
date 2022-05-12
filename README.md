@@ -26,4 +26,7 @@ Credits:
 - Menu Theme : Main Theme from Fruit Box by GameSaien
 - Easy/Hard Solitaire Theme : Title Theme from Super Mario Maker by Nintendo
 
+
+
+
 - If you have problems with the music/music not working, comment out the three lines for the music loading in each file
